@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Matrix {
+    static void printMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");  // Use print instead of println
+            }
+            System.out.println();
+        }
+    }
+
+    static void addMatrices(int[][] a, int[][] b) {
+        int r = a.length;
+        int c = a[0].length;
+
+        int[][] sum = new int[r][c];
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                sum[i][j] = a[i][j] + b[i][j];
+            }
+        }
+        printMatrix(sum);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of Rows");
+        int r1 = sc.nextInt();
+        System.out.println("Enter number of Columns");
+        int c1 = sc.nextInt();
+        int[][] matrix1 = new int[r1][c1];
+
+        System.out.println("Enter elements for Matrix 1:");
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c1; j++) {
+                matrix1[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("Enter number of Rows");
+        int r2 = sc.nextInt();
+        System.out.println("Enter number of Columns");
+        int c2 = sc.nextInt();
+        int[][] matrix2 = new int[r2][c2];
+
+        System.out.println("Enter elements for Matrix 2:");
+        for (int i = 0; i < r2; i++) {
+            for (int j = 0; j < c2; j++) {
+                matrix2[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("Matrix 1:");
+        printMatrix(matrix1);
+        System.out.println("Matrix 2:");
+        printMatrix(matrix2);
+
+        System.out.println("Sum of Matrices:");
+        addMatrices(matrix1, matrix2);
+    }
+}
