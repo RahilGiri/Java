@@ -1,3 +1,4 @@
+//Given a square matrix turn it by 90 degrees in a clockwise direction without using any extra space 
 import java.util.Scanner;
 
 public class Matrix {
@@ -9,11 +10,10 @@ public class Matrix {
             System.out.println();
         }
     }
-    
-    static void transposeInPlace(int[][] matrix) {
-        int n = matrix.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
+
+    static void transposeInPlace(int[][] matrix, int r, int c) {
+        for (int i = 0; i < r; i++) {
+            for (int j = i + 1; j < c; j++) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[j][i];
                 matrix[j][i] = temp;
@@ -21,20 +21,25 @@ public class Matrix {
         }
     }
 
-    static int[][] rotate(int[][] matrix) {
-        int r = matrix.length;
-        int c = matrix[0].length; // Assuming all rows have the same length
-        
-        transposeInPlace(matrix);
-        
-        int[][] rotatedMatrix = new int[c][r];
-        for (int i = 0; i < c; i++) {
-            for (int j = 0; j < r; j++) {
-                rotatedMatrix[i][j] = matrix[j][i];
-            }
+    static void reverseArray(int[] arr) {
+        int i = 0, j = arr.length - 1;
+        while (i < j) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
         }
-        
-        return rotatedMatrix;
+    }
+
+    static void rotate(int[][] matrix, int r, int c) {
+        // Transpose
+        transposeInPlace(matrix, r, c);
+
+        // Reverse each row
+        for (int i = 0; i < r; i++) {
+            reverseArray(matrix[i]);
+        }
     }
 
     public static void main(String[] args) {
@@ -56,8 +61,8 @@ public class Matrix {
         System.out.println("Input Matrix:");
         printMatrix(matrix);
 
-        int[][] rotatedMatrix = rotate(matrix);
+        rotate(matrix, r, c);
         System.out.println("Rotation of matrix:");
-        printMatrix(rotatedMatrix);
+        printMatrix(matrix);
     }
 }
