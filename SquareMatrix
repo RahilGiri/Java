@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Matrix {
+    static void printMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    
+    static void transposeInPlace(int[][] matrix) {
+        int n = matrix.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
+    static int[][] rotate(int[][] matrix) {
+        int r = matrix.length;
+        int c = matrix[0].length; // Assuming all rows have the same length
+        
+        transposeInPlace(matrix);
+        
+        int[][] rotatedMatrix = new int[c][r];
+        for (int i = 0; i < c; i++) {
+            for (int j = 0; j < r; j++) {
+                rotatedMatrix[i][j] = matrix[j][i];
+            }
+        }
+        
+        return rotatedMatrix;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of Rows for Matrix:");
+        int r = sc.nextInt();
+        System.out.println("Enter number of Columns for Matrix:");
+        int c = sc.nextInt();
+        int[][] matrix = new int[r][c];
+
+        System.out.println("Enter " + r * c + " Values");
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("Input Matrix:");
+        printMatrix(matrix);
+
+        int[][] rotatedMatrix = rotate(matrix);
+        System.out.println("Rotation of matrix:");
+        printMatrix(rotatedMatrix);
+    }
+}
