@@ -1,0 +1,76 @@
+//Given an name matrix 'a' return all elements of the matrix in spiral order
+import java.util.Scanner;
+
+public class PrintSpiral {
+    static void printMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void printSpiralOrder(int[][] matrix, int r, int c) {
+        int topRow = 0, bottomRow = r - 1, leftCol = 0, rightCol = c - 1;
+        int totalElements = 0;
+
+        while (totalElements < r * c) {
+            // Traverse from left to right along the top row
+            for (int j = leftCol; j <= rightCol; j++) {
+                System.out.print(matrix[topRow][j] + " ");
+                totalElements++;
+            }
+            topRow++; // Move the top row down
+
+            // Traverse from top to bottom along the right column
+            for (int i = topRow; i <= bottomRow; i++) {
+                System.out.print(matrix[i][rightCol] + " ");
+                totalElements++;
+            }
+            rightCol--; // Move the right column to the left
+
+            // Check if there are more elements to print
+            if (totalElements < r * c) {
+                // Traverse from right to left along the bottom row
+                for (int j = rightCol; j >= leftCol; j--) {
+                    System.out.print(matrix[bottomRow][j] + " ");
+                    totalElements++;
+                }
+                bottomRow--; // Move the bottom row up
+            }
+
+            // Check if there are more elements to print
+            if (totalElements < r * c) {
+                // Traverse from bottom to top along the left column
+                for (int i = bottomRow; i >= topRow; i--) {
+                    System.out.print(matrix[i][leftCol] + " ");
+                    totalElements++;
+                }
+                leftCol++; // Move the left column to the right
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows: ");
+        int rows = scanner.nextInt();
+        System.out.print("Enter the number of columns: ");
+        int cols = scanner.nextInt();
+
+        int[][] matrix = new int[rows][cols];
+
+        System.out.println("Enter the elements of the matrix:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+
+        System.out.println("Spiral Order of Matrix:");
+        printSpiralOrder(matrix, rows, cols);
+
+        // You can omit the scanner.close() statement if you prefer not to close it here.
+    }
+}
