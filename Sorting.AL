@@ -1,0 +1,48 @@
+//Sorting the String in ascending and decending....
+import java.util.ArrayList;
+import java.util.Collections;
+public class Problems {
+    static void reverseList(ArrayList<Integer> list) {
+        int i = 0;
+        int j = list.size() - 1;
+        while (i < j) {
+            Integer temp = Integer.valueOf(list.get(i));
+            list.set(i, list.get(j));
+            list.set(j, temp);
+            i++;
+            j--;
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        System.out.println("Original list: " + list);
+        // reverseList(list);
+        Collections.reverse(list);
+
+        System.out.println("Reverse list: " + list);
+        Collections.sort(list);
+        System.out.println(" Asscending order" +list);
+        Collections.sort(list,Collections.reverseOrder());
+        System.out.println("Decendig Order "+list);
+        //Sorting string....
+        ArrayList<String>l1=new ArrayList<>();
+        l1.add("Welcome");
+        l1.add("To");
+        l1.add("Physics");
+        l1.add("Wallah");
+        System.out.println("OG" +l1);
+        Collections.sort(l1);
+        System.out.println("Ascending " +l1);
+        Collections.sort(l1,Collections.reverseOrder());
+        System.out.println("Decending " +l1);
+
+    }
+}
