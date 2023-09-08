@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Factorial {
+    static int factorial(int n) {
+        // Base case
+        if (n == 0) {
+            return 1;
+        }
+        // Recursive work
+        int smallerAns = factorial(n - 1);
+        // Self work
+        int ans = n * smallerAns;
+        return ans; // You need to return the result
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the value of n: ");
+        int n = scanner.nextInt();
+        int result = factorial(n);
+        System.out.println("Factorial of " + n + " is " + result);
+    }
+}
