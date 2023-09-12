@@ -1,0 +1,48 @@
+//Given an integer find out the sum of its digits using recursion
+
+import java.util.Scanner;
+
+public class SOD {
+    static int sod(int n) {
+        // Handle negative numbers by converting them to positive
+        n = Math.abs(n);
+
+        // Base case
+        // The base case checks if n is a single-digit number (between 0 and 9 inclusive). If n is a single-digit number, it returns n itself because the sum of its digits is the number itself.
+        if (n >= 0 && n <= 9) {
+            return n;
+        }
+
+        // Recursion work -> small answer
+        int smallAns = sod(n / 10);
+
+        // Self flow
+        return smallAns + n % 10;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(sod(12)); // Example with a positive integer
+        System.out.println(sod(-4)); // Example with a negative integer
+    }
+}
+//short method
+import java.util.Scanner;
+
+public class SOD {
+    static int sod(int n) {
+        // Handle negative numbers by converting them to positive
+        n = Math.abs(n);
+
+        // Base case
+        // The base case checks if n is a single-digit number (between 0 and 9 inclusive). If n is a single-digit number, it returns n itself because the sum of its digits is the number itself.
+        if (n >= 0 && n <= 9) return n;
+        
+
+       return sod(n/10)+n%10;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(sod(12)); // Example with a positive integer
+        System.out.println(sod(-4)); // Example with a negative integer
+    }
+}
