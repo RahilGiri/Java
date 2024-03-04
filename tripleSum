@@ -1,32 +1,70 @@
-import java.util.Scanner;
+// Online C compiler to run C program online
 
-public class TripleSum {
-    static int tripleSum(int[] arr, int target) {
-        int n = arr.length;
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                for (int k = j + 1; k < n; k++) {
-                    if (arr[i] + arr[j] + arr[k] == target) {
-                        ans++;
-                    }
-                }
-            }
-        }
-        return ans;
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Array Size");
-        int n = sc.nextInt();
-        int arr[] = new int[n];
-        System.out.println("Enter " + n + " elements");
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
-        System.out.println("Enter the Target: ");
-        int target = sc.nextInt();
-        System.out.println("There are " + tripleSum(arr, target) + " possible triplet sums reaching the target");
-    }
+#include <stdio.h>
+#include <stdlib.h>
+struct Node /* A linked list node */
+{
+int data;
+struct Node* next;
+};
+void swap(int* a, int* b); /*Function to swap two integers at addresses a
+and b */
+void pairWiseSwap(struct Node* head) /* Function to pairwise swap
+elements of a linked list */
+{
+struct Node* temp = head;
+/* Traverse further only if there are at-least two nodes left */
+while (temp != NULL && temp->next != NULL)
+{
+/* Swap data of node with its next node's data */
+swap(&temp->data, &temp->next->data);
+temp = temp->next->next; /* Move temp by 2 for the next pair */
+}
+}
+/* UTILITY FUNCTIONS */
+void swap(int* a, int* b) /* Function to swap two integers */
+{
+int temp;
+temp = *a;
+*a = *b;
+*b = temp;
+}
+/* Function to add a node at the beginning of Linked List */
+void push(struct Node** head_ref, int new_data)
+{
+/* allocate node */
+struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+/* put in the data */
+new_node->data = new_data;
+/* link the old list of the new node */
+new_node->next = (*head_ref);
+/* move the head to point to the new node */
+(*head_ref) = new_node;
+}
+/* Function to print nodes in a given linked list */
+void printList(struct Node* node)
+{
+while (node!= NULL)
+{
+printf("%d ", node->data);
+node = node->next;
+}
+}
+/* Driver program to test above function */
+int main()
+{
+struct Node* start = NULL;
+/* The constructed linked list is:
+1->2->3->4->5 */
+push(&start, 5);
+push(&start, 4);
+push(&start, 3);
+push(&start, 2);
+push(&start, 1);
+printf("Linked list before calling pairWiseSwap()\n");
+printList(start);
+pairWiseSwap(start);
+printf("\n Linked list after calling pairWiseSwap()\n");
+printList(start);
+return 0;
 }
